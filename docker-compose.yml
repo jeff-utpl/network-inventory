@@ -1,0 +1,33 @@
+services:
+  # --- CONTENEDOR DE BASE DE DATOS ---
+  db:
+    image: postgres:15
+    container_name: inventory-db
+    environment:
+      POSTGRES_USER: user_inventory
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: network_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Para que los datos no se borren al apagar el contenedor
+
+  # --- CONTENEDOR DE TU APP ---
+  app:
+    build: .
+    container_name: inventory-app
+    ports:
+      - "8081:8081"
+    environment:
+      # Inyectamos las variables que lee nuestro application.properties (Opción A)
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/network_db
+      SPRING_DATASOURCE_USERNAME: user_inventory
+      SPRING_DATASOURCE_PASSWORD: password123
+      SPRING_DATASOURCE_DRIVER: org.postgresql.Driver
+      SPRING_JPA_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+    depends_on:
+      - db # Espera a que la base de datos esté lista antes de arrancar la app
+
+# Definimos el volumen para persistencia real de datos
+volumes:
+  postgres_data:

@@ -1,0 +1,31 @@
+# --- JAVA & MAVEN ---
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+HELP.md
+
+# --- DOCKER  ---
+postgres_data/
+*.log
+
+# --- IDEs (IntelliJ, STS, VS Code, NetBeans) ---
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts4-cache
+nbproject/private/
+nbbuild/
+dist/
+build/
+
+# --- SISTEMA ---
+.DS_Store
+Thumbs.db
