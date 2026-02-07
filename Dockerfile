@@ -14,4 +14,4 @@ COPY --from=build /app/target/network-inventory-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8081
 # Forzamos a Java a usar el puerto 8081 al arrancar
-ENTRYPOINT ["java", "-Dserver.port=8081", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Xmx300m", "-Xss512k", "-Dserver.port=8081", "-jar", "app.jar"]
